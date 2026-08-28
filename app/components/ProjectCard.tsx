@@ -31,9 +31,9 @@ export default function ProjectCard({ project }: { project: Project }) {
 
   const screenshotList =
     screenshots.length > 0 ? (
-      <ul className="space-y-3">
+      <ul className="flex flex-col gap-3 md:flex-row">
         {screenshots.map((s, i) => (
-          <li key={`${i}-${s.src}`}>
+          <li key={`${i}-${s.src}`} className="min-w-0 flex-1">
             <figure>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img

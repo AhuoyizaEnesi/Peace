@@ -1,4 +1,4 @@
-import { links } from "@/app/data/profile";
+import { about, links } from "@/app/data/profile";
 import LinkButton from "./LinkButton";
 
 export default function About() {
@@ -9,10 +9,11 @@ export default function About() {
     { label: "Resume", href: links.resume },
   ].filter((e) => e.href);
 
-  if (entries.length === 0) return null;
+  if (!about && entries.length === 0) return null;
   return (
     <section>
       <h2 className="text-xl font-semibold">About</h2>
+      {about && <p className="mt-3 max-w-prose text-[var(--muted)]">{about}</p>}
       <ul className="mt-4 flex flex-wrap gap-2">
         {entries.map((e) => (
           <li key={e.label}>

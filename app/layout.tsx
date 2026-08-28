@@ -12,9 +12,19 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const title = "Peace Enesi | Software Engineer";
+const description =
+  "Full-stack and systems engineer building real-time, distributed, and data-intensive software.";
+
 export const metadata: Metadata = {
-  title: "",
-  description: "",
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    type: "website",
+    siteName: "Peace Enesi",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
