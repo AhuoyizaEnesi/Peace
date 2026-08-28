@@ -1,7 +1,7 @@
 export const name = "Peace Enesi"
 
 export const tagline =
-  "Full-stack and systems engineer building real-time, distributed, and data-intensive software."
+  "Full-stack and systems engineer. Distributed apps, live infrastructure, and real-time software."
 
 export const techSignals: string[] = [
   "TypeScript",
@@ -14,7 +14,7 @@ export const techSignals: string[] = [
 ]
 
 export const about: string =
-  "I'm a Computer Science student at Texas Tech University with a Mathematics minor, in an accelerated BS/MS program in Software and Security Engineering. I work on systems, distributed applications, infrastructure, and real-time software. I'm the co-founder and CTO of SELT, a multi-tenant campus marketplace."
+  "I'm a Computer Science student at Texas Tech University with a Mathematics minor. I work on systems, distributed applications, infrastructure, and real-time software. I'm the co-founder and CTO of SELT, a multi-tenant campus marketplace."
 
 export const links: {
   github: string

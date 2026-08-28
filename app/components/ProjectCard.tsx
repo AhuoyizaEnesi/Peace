@@ -5,7 +5,15 @@ import LinkButton from "./LinkButton";
 import MetricChip from "./MetricChip";
 import TechNotes from "./TechNotes";
 
-export default function ProjectCard({ project }: { project: Project }) {
+export default function ProjectCard({
+  project,
+  index,
+  total,
+}: {
+  project: Project;
+  index: number;
+  total: number;
+}) {
   const {
     title,
     subtitle,
@@ -17,16 +25,19 @@ export default function ProjectCard({ project }: { project: Project }) {
     blocks,
     notes,
     links,
+    slabColor,
+    marginNote,
   } = project;
 
   const isExternal = /^https?:\/\//.test(certificate ?? "");
+  const marker = `${String(index).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
 
   const metricsRow =
     metrics.length > 0 ? (
       <ul className="flex flex-wrap gap-2">
         {metrics.map((m, i) => (
           <li key={`${i}-${m}`}>
-            <MetricChip label={m} />
+            <MetricChip label={m} background={i === 0 ? slabColor : undefined} />
           </li>
         ))}
       </ul>
@@ -34,7 +45,7 @@ export default function ProjectCard({ project }: { project: Project }) {
 
   const screenshotList =
     screenshots.length > 0 ? (
-      <ul className="flex flex-col gap-3 md:flex-row">
+      <ul className="flex flex-col gap-3 md:-mr-[calc(1.5rem+24px)] md:flex-row">
         {screenshots.map((s, i) => (
           <li key={`${i}-${s.src}`} className="min-w-0 flex-1">
             <figure>
@@ -44,11 +55,11 @@ export default function ProjectCard({ project }: { project: Project }) {
                 width={s.width}
                 height={s.height}
                 loading="eager"
-                sizes="(min-width: 768px) 50vw, 100vw"
-                className="h-auto w-full rounded-xl border border-[var(--border)]"
+                sizes="(min-width: 768px) 900px, 100vw"
+                className="h-auto w-full border-2 border-[var(--border)]"
               />
               {s.caption && (
-                <figcaption className="mt-1 text-xs text-[var(--muted)]">
+                <figcaption className="mt-1 font-mono text-xs text-[var(--muted)]">
                   {s.caption}
                 </figcaption>
               )}
@@ -72,8 +83,10 @@ export default function ProjectCard({ project }: { project: Project }) {
       <dl className="space-y-3">
         {blocks.map((b, i) => (
           <div key={`${i}-${b.label}`}>
-            <dt className="text-sm font-medium">{b.label}</dt>
-            <dd className="text-sm text-[var(--muted)]">{b.body}</dd>
+            <dt className="font-mono text-xs lowercase text-[var(--muted)]">
+              {b.label}
+            </dt>
+            <dd className="text-sm">{b.body}</dd>
           </div>
         ))}
       </dl>
@@ -91,47 +104,66 @@ export default function ProjectCard({ project }: { project: Project }) {
     ) : null;
 
   return (
-    <article className="rounded-xl border border-[var(--border)] bg-[var(--card)] p-6">
-      <header className="space-y-1">
-        {title && <h2 className="text-xl font-semibold">{title}</h2>}
-        {subtitle && <p className="text-[var(--muted)]">{subtitle}</p>}
-        {recognition && (
-          <p className="text-sm">
-            {recognition}
-            {certificate && (
-              <>
-                {" "}
-                <a
-                  href={certificate}
-                  {...(isExternal
-                    ? { target: "_blank", rel: "noopener noreferrer" }
-                    : {})}
-                  className="text-[var(--accent)] underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
-                >
-                  {isExternal ? "Award" : "Certificate"}
-                </a>
-              </>
+    <div className="md:grid md:grid-cols-[minmax(0,1fr)_130px] md:gap-6">
+      <article className="border-2 border-[var(--border)] bg-[var(--card)]">
+        <div
+          aria-hidden="true"
+          className="h-[10px] border-b-2 border-[var(--border)]"
+          style={{ background: slabColor }}
+        />
+        <div className="p-6">
+          <header className="space-y-1">
+            <div className="flex flex-wrap items-baseline gap-3">
+              {title && <h2 className="text-xl font-semibold">{title}</h2>}
+              <span className="font-mono text-sm text-[var(--muted)]">{marker}</span>
+            </div>
+            {subtitle && <p className="text-[var(--muted)]">{subtitle}</p>}
+            {marginNote && (
+              <p className="font-mono text-xs text-[var(--muted)] md:hidden">
+                {marginNote}
+              </p>
             )}
-          </p>
-        )}
-      </header>
+            {recognition && (
+              <p className="text-sm">
+                {recognition}
+                {certificate && (
+                  <>
+                    {" "}
+                    <a
+                      href={certificate}
+                      {...(isExternal
+                        ? { target: "_blank", rel: "noopener noreferrer" }
+                        : {})}
+                      className="underline decoration-2 underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--border)]"
+                    >
+                      {isExternal ? "Award" : "Certificate"}
+                    </a>
+                  </>
+                )}
+              </p>
+            )}
+          </header>
 
-      {/* Mobile: single column in spec order. Desktop (md+): two columns. */}
-      <div className="mt-4 flex flex-col gap-4 md:grid md:grid-cols-2 md:gap-6">
-        <div className="order-1 md:order-2 md:col-start-2 md:row-start-1">
-          {metricsRow}
+          {/* Mobile: metrics, screenshots, blocks, links. Desktop: screenshots full width, then two columns. */}
+          <div className="mt-4 flex flex-col gap-4 md:grid md:grid-cols-2 md:gap-6">
+            <div className="order-2 md:order-1 md:col-span-2">{screenshotList}</div>
+            <div className="order-1 md:order-2">{metricsRow}</div>
+            <div className="order-3 space-y-4 md:order-3">
+              {blockList}
+              <TechNotes items={notes} />
+            </div>
+            <div className="order-4 space-y-4 md:order-4 md:col-start-1 md:row-start-3">
+              {architectureList}
+              {linkRow}
+            </div>
+          </div>
         </div>
-        <div className="order-2 md:order-1 md:col-start-1 md:row-start-1 md:row-span-2 md:space-y-4">
-          {screenshotList}
-          {architectureList}
-          <div className="hidden md:block">{linkRow}</div>
-        </div>
-        <div className="order-3 space-y-4 md:col-start-2 md:row-start-2">
-          {blockList}
-          <TechNotes items={notes} />
-        </div>
-        <div className="order-4 md:hidden">{linkRow}</div>
-      </div>
-    </article>
+      </article>
+      {marginNote && (
+        <aside className="hidden pt-4 font-mono text-xs leading-relaxed text-[var(--muted)] md:block">
+          {marginNote}
+        </aside>
+      )}
+    </div>
   );
 }

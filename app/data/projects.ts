@@ -6,6 +6,8 @@ export interface Project {
   architecture: string[][]
   blocks: { label: string; body: string }[]
   notes: string[]
+  slabColor: string
+  marginNote: string
   recognition?: string
   certificate?: string
   screenshots: { src: string; alt: string; width: number; height: number; caption?: string }[]
@@ -15,6 +17,8 @@ export interface Project {
 export const projects: Project[] = [
   {
     slug: "codeclash",
+    slabColor: "var(--slab-1)",
+    marginNote: "built in 24h. the hard part was keeping match state in sync while running untrusted code.",
     title: "CodeClash",
     subtitle: "Real-Time Competitive Coding Platform",
     recognition: "2nd Place, HackWesTX. Top 3, Google x MLH AI Roadshow.",
@@ -69,6 +73,8 @@ export const projects: Project[] = [
   },
   {
     slug: "selt",
+    slabColor: "var(--slab-2)",
+    marginNote: "live product. 350+ active users, five campus instances, one codebase.",
     title: "SELT Multi-Campus Demo",
     subtitle: "Multi-Tenant Marketplace Test Platform",
     recognition: "Live instances: Texas Tech, Texas A&M, Baylor, Stanford, UT Austin.",
@@ -128,6 +134,8 @@ export const projects: Project[] = [
   },
   {
     slug: "intellispeech",
+    slabColor: "var(--slab-3)",
+    marginNote: "team project. won best overall at the SEO showcase.",
     title: "IntelliSpeech",
     subtitle: "Real-Time AI Voice Translation",
     recognition: "Best Overall Project, SEO Tech Developer Innovation Showcase.",

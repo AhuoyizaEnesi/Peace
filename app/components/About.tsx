@@ -14,10 +14,10 @@ export default function About() {
     <section>
       <h2 className="text-xl font-semibold">About</h2>
       {about && <p className="mt-3 max-w-prose text-[var(--muted)]">{about}</p>}
-      <ul className="mt-4 flex flex-wrap gap-2">
+      <ul className="mt-4 flex flex-wrap gap-5">
         {entries.map((e) => (
           <li key={e.label}>
-            <LinkButton label={e.label} href={e.href} />
+            <LinkButton label={e.label} href={e.href} variant="text" />
           </li>
         ))}
       </ul>
