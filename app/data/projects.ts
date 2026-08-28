@@ -8,7 +8,7 @@ export interface Project {
   notes: string[]
   recognition?: string
   certificate?: string
-  screenshots: { src: string; caption?: string }[]
+  screenshots: { src: string; alt: string; width: number; height: number; caption?: string }[]
   links: { label: string; href: string | null }[]
 }
 
@@ -18,7 +18,7 @@ export const projects: Project[] = [
     title: "CodeClash",
     subtitle: "Real-Time Competitive Coding Platform",
     recognition: "2nd Place, HackWesTX. Top 3, Google x MLH AI Roadshow.",
-    certificate: "/certificates/codeclash.png",
+    certificate: "https://devpost.com/software/codeclash-xje93y",
     metrics: [
       "<200ms sync",
       "50+ concurrent matches",
@@ -28,7 +28,15 @@ export const projects: Project[] = [
     architecture: [
       ["React Client", "WebSocket Layer", "Match State", "Judge0 Sandbox", "Results"],
     ],
-    screenshots: [{ src: "/screenshots/codeclash.png", caption: "" }],
+    screenshots: [
+      {
+        src: "/screenshots/codeclash.png",
+        alt: "CodeClash match room showing the Two Sum Challenge prompt on the left, a JavaScript code editor with Run Tests and Submit buttons on the right, a battle chat panel, and You versus Opponent progress bars",
+        width: 1883,
+        height: 953,
+        caption: "",
+      },
+    ],
     blocks: [
       {
         label: "System",
@@ -55,7 +63,7 @@ export const projects: Project[] = [
       "Concurrency assumptions",
     ],
     links: [
-      { label: "Live Demo", href: null },
+      { label: "Devpost", href: "https://devpost.com/software/codeclash-xje93y" },
       { label: "GitHub", href: null },
     ],
   },
@@ -69,9 +77,27 @@ export const projects: Project[] = [
       ["campus subdomain", "runtime config", "shared component system", "campus UI"],
     ],
     screenshots: [
-      { src: "/screenshots/selt-ttu.png", caption: "Texas Tech" },
-      { src: "/screenshots/selt-tamu.png", caption: "Texas A&M" },
-      { src: "/screenshots/selt-baylor.png", caption: "Baylor" },
+      {
+        src: "/screenshots/selt-ttu.png",
+        alt: "SELT Explore page branded as RaiderSELT for Texas Tech, with the Texas Tech logo, a search bar, and a list of demo marketplace listings with red price badges",
+        width: 1488,
+        height: 812,
+        caption: "Texas Tech",
+      },
+      {
+        src: "/screenshots/selt-tamu.png",
+        alt: "SELT Explore page branded as AggieSELT for Texas A&M, with the Texas A&M logo, a search bar, and the same list of demo marketplace listings with maroon price badges",
+        width: 1488,
+        height: 812,
+        caption: "Texas A&M",
+      },
+      {
+        src: "/screenshots/selt-baylor.png",
+        alt: "SELT Explore page branded as BearSELT for Baylor, with the Baylor logo, a search bar, and the same list of demo marketplace listings with green price badges",
+        width: 1488,
+        height: 812,
+        caption: "Baylor",
+      },
     ],
     blocks: [
       {
@@ -111,7 +137,15 @@ export const projects: Project[] = [
       ["Audio Input", "WebRTC", "Translation", "Voice Synthesis", "Playback"],
       ["incoming packets", "resequencing buffer", "bounded queue", "playback"],
     ],
-    screenshots: [{ src: "/screenshots/intellispeech.png", caption: "" }],
+    screenshots: [
+      {
+        src: "/screenshots/intellispeech.png",
+        alt: "IntelliSpeech landing page reading Welcome to IntelliSpeech, talk, without barriers, with Sign In to Start and Sign Up to Host buttons between a phone and a laptop illustration",
+        width: 1536,
+        height: 700,
+        caption: "",
+      },
+    ],
     blocks: [
       {
         label: "System",

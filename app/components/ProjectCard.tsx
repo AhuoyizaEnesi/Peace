@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Project } from "@/app/data/projects";
 import ArchitectureStrip from "./ArchitectureStrip";
 import LinkButton from "./LinkButton";
@@ -18,6 +19,8 @@ export default function ProjectCard({ project }: { project: Project }) {
     links,
   } = project;
 
+  const isExternal = /^https?:\/\//.test(certificate ?? "");
+
   const metricsRow =
     metrics.length > 0 ? (
       <ul className="flex flex-wrap gap-2">
@@ -35,11 +38,14 @@ export default function ProjectCard({ project }: { project: Project }) {
         {screenshots.map((s, i) => (
           <li key={`${i}-${s.src}`} className="min-w-0 flex-1">
             <figure>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={s.src}
-                alt={s.caption ?? ""}
-                className="w-full rounded-md border border-[var(--border)]"
+                alt={s.alt}
+                width={s.width}
+                height={s.height}
+                loading="eager"
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="h-auto w-full rounded-xl border border-[var(--border)]"
               />
               {s.caption && (
                 <figcaption className="mt-1 text-xs text-[var(--muted)]">
@@ -97,9 +103,12 @@ export default function ProjectCard({ project }: { project: Project }) {
                 {" "}
                 <a
                   href={certificate}
+                  {...(isExternal
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
                   className="text-[var(--accent)] underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
                 >
-                  Certificate
+                  {isExternal ? "Award" : "Certificate"}
                 </a>
               </>
             )}
