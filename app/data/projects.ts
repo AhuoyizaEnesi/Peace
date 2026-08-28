@@ -20,20 +20,13 @@ export const projects: Project[] = [
   {
     slug: "codeclash",
     slabColor: "var(--slab-1)",
-    marginNote: "built in 24h. the hard part was keeping match state in sync while running untrusted code.",
+    marginNote: "built in 24h. placed 2nd. the execution layer exists, wiring it live is next.",
     title: "CodeClash",
     subtitle: "Real-Time Competitive Coding Platform",
     recognition: "2nd Place, HackWesTX. Top 3, Google x MLH AI Roadshow.",
     certificate: "https://devpost.com/software/codeclash-xje93y",
-    metrics: [
-      "<200ms sync",
-      "50+ concurrent matches",
-      "10,000+ submissions",
-      "99.5% execution success",
-    ],
-    architecture: [
-      ["React Client", "WebSocket Layer", "Match State", "Judge0 Sandbox", "Results"],
-    ],
+    metrics: ["24h build", "2nd place hackwestx", "top 3 google x mlh"],
+    architecture: [["react client", "socket.io rooms", "match state", "judge0 helper"]],
     screenshots: [
       {
         src: "/screenshots/codeclash.png",
@@ -67,19 +60,19 @@ export const projects: Project[] = [
     blocks: [
       {
         label: "System",
-        body: "Real-time multiplayer coding platform with live synchronized match state.",
+        body: "Head-to-head competitive coding prototype built in 24 hours at HackWesTX.",
       },
       {
         label: "My Work",
-        body: "Built the platform architecture, real-time state flow, code execution integration, and backend communication in 24 hours using React, Flask, WebSockets, PostgreSQL, and Judge0.",
+        body: "Built the React client, the Express API with Google OAuth sign-in, the Socket.IO match layer for rooms, chat, and live progress, and a Judge0 code execution helper.",
       },
       {
         label: "Hard Problem",
-        body: "Keeping concurrent match state synchronized while executing untrusted code without making the UI feel slow.",
+        body: "Scoping a real-time competitive system to something demoable in one day without faking the architecture: the match layer and execution helper are real code, the demo simulates results on top of them.",
       },
       {
-        label: "Results",
-        body: "Sub-200ms match synchronization across concurrent users, with execution isolated from UI state through sandboxed judging.",
+        label: "Status",
+        body: "Prototype. The deployed demo runs Google auth plus a single-player simulation. Wiring the Socket.IO handlers and Judge0 into the live server is the next step.",
       },
     ],
     notes: [
