@@ -11,6 +11,8 @@ export interface Project {
   recognition?: string
   certificate?: string
   screenshots: { src: string; alt: string; width: number; height: number; caption?: string }[]
+  photos?: { src: string; alt: string; width: number; height: number }[]
+  photosCaption?: string
   links: { label: string; href: string | null }[]
 }
 
@@ -41,6 +43,27 @@ export const projects: Project[] = [
         caption: "",
       },
     ],
+    photos: [
+      {
+        src: "/photos/mlh-presenting.png",
+        alt: "Peace Enesi presenting CodeClash with a microphone at the Google x MLH AI Roadshow in Austin, with the team slide on a screen behind",
+        width: 2560,
+        height: 1707,
+      },
+      {
+        src: "/photos/mlh-team.png",
+        alt: "The CodeClash team presenting in front of the MLH AI Roadshow banner to a seated audience",
+        width: 2560,
+        height: 1707,
+      },
+      {
+        src: "/photos/mlh-slide.png",
+        alt: "Meet Our Team slide on a screen showing the four Texas Tech team members with their names and majors, next to the MLH logo",
+        width: 2560,
+        height: 1707,
+      },
+    ],
+    photosCaption: "google x mlh ai roadshow, austin",
     blocks: [
       {
         label: "System",

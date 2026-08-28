@@ -27,6 +27,8 @@ export default function ProjectCard({
     links,
     slabColor,
     marginNote,
+    photos = [],
+    photosCaption,
   } = project;
 
   const isExternal = /^https?:\/\//.test(certificate ?? "");
@@ -67,6 +69,32 @@ export default function ProjectCard({
           </li>
         ))}
       </ul>
+    ) : null;
+
+  const photoRow =
+    photos.length > 0 ? (
+      <figure className="mt-3">
+        <ul className="grid gap-3 md:grid-cols-3">
+          {photos.map((p, i) => (
+            <li key={`${i}-${p.src}`} className="min-w-0">
+              <Image
+                src={p.src}
+                alt={p.alt}
+                width={p.width}
+                height={p.height}
+                loading="eager"
+                sizes="(min-width: 768px) 300px, 100vw"
+                className="h-auto w-full border-2 border-[var(--border)]"
+              />
+            </li>
+          ))}
+        </ul>
+        {photosCaption && (
+          <figcaption className="mt-1 font-mono text-xs text-[var(--muted)]">
+            {photosCaption}
+          </figcaption>
+        )}
+      </figure>
     ) : null;
 
   const architectureList =
@@ -146,7 +174,10 @@ export default function ProjectCard({
 
           {/* Mobile: metrics, screenshots, blocks, links. Desktop: screenshots full width, then two columns. */}
           <div className="mt-4 flex flex-col gap-4 md:grid md:grid-cols-2 md:gap-6">
-            <div className="order-2 md:order-1 md:col-span-2">{screenshotList}</div>
+            <div className="order-2 md:order-1 md:col-span-2">
+              {screenshotList}
+              {photoRow}
+            </div>
             <div className="order-1 md:order-2">{metricsRow}</div>
             <div className="order-3 space-y-4 md:order-3">
               {blockList}
