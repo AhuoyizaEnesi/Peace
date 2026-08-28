@@ -67,8 +67,9 @@ export const projects: Project[] = [
       "Concurrency assumptions",
     ],
     links: [
+      { label: "Live Demo", href: "https://code-clash.netlify.app" },
+      { label: "GitHub", href: "https://github.com/AhuoyizaEnesi/codeclash" },
       { label: "Devpost", href: "https://devpost.com/software/codeclash-xje93y" },
-      { label: "GitHub", href: null },
     ],
   },
   {

@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 const title = "Peace Enesi | Software Engineer";
 const description =
-  "Full-stack and systems engineer building real-time, distributed, and data-intensive software.";
+  "Full-stack and systems engineer. Distributed apps, live infrastructure, and real-time software.";
 
 export const metadata: Metadata = {
   title,
