@@ -10,6 +10,7 @@ export interface Project {
   marginNote: string
   recognition?: string
   certificate?: string
+  certificateImage?: { alt: string; width: number; height: number }
   screenshots: { src: string; alt: string; width: number; height: number; caption?: string }[]
   photos?: { src: string; alt: string; width: number; height: number }[]
   photosCaption?: string
@@ -157,6 +158,11 @@ export const projects: Project[] = [
     subtitle: "Real-Time AI Voice Translation",
     recognition: "Best Overall Project, SEO Tech Developer Innovation Showcase.",
     certificate: "/certificates/intellispeech.png",
+    certificateImage: {
+      alt: "Best Overall Project certificate, SEO Tech Developer Innovation Showcase",
+      width: 835,
+      height: 831,
+    },
     metrics: ["WebRTC", "packet resequencing", "bounded queues"],
     architecture: [
       ["Audio Input", "WebRTC", "Translation", "Voice Synthesis", "Playback"],

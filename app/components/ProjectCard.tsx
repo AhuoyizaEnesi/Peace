@@ -19,6 +19,7 @@ export default function ProjectCard({
     subtitle,
     recognition,
     certificate,
+    certificateImage,
     metrics,
     screenshots,
     architecture,
@@ -154,7 +155,7 @@ export default function ProjectCard({
             {recognition && (
               <p className="text-sm">
                 {recognition}
-                {certificate && (
+                {certificate && (isExternal || !certificateImage) && (
                   <>
                     {" "}
                     <a
@@ -169,6 +170,24 @@ export default function ProjectCard({
                   </>
                 )}
               </p>
+            )}
+            {certificate && !isExternal && certificateImage && (
+              <a
+                href={certificate}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 inline-block w-[180px] max-w-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--border)]"
+              >
+                <Image
+                  src={certificate}
+                  alt={certificateImage.alt}
+                  width={certificateImage.width}
+                  height={certificateImage.height}
+                  loading="eager"
+                  sizes="180px"
+                  className="h-auto w-full border-2 border-[var(--border)]"
+                />
+              </a>
             )}
           </header>
 
